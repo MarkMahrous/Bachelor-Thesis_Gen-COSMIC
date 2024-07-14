@@ -1,0 +1,91 @@
+#include <ESP8266WIFI.h>
+
+const char* ssid = "Your SSID"
+const char* password = "Your Wifi Password"
+int LM35 = A0;  //Analog channel A0 as used to measure tempreture
+WifiServer server(80);
+
+void setup(){
+Serial.begin(115200);
+delay(10);
+// Connnectto Wifi network
+Serial.println();
+Serial.println();
+Serial.print("Connecting to");
+Serial.println(ssid);
+
+Wifi.begin(ssid, password);
+while(WiFi.status()!= WL_CONNECTED){
+delay(500);
+Serial.print(".");
+}
+Serial.println("");
+Serial.println("WiFi connected");
+//Start the server
+server.begin();
+Serial.println("Server started");
+//print the IP address on serial monitor
+Serial.print("Use this URL to connect");
+Serial.print("https://") 
+Serial.println("/");
+}
+
+void loop(){
+// Check if a client has connected
+WiFiClient client = server.available();
+if(!client){
+return;
+}
+
+//Wait untill the client sends some data
+Serial.println("new client");
+while(!client.available()){
+delay(1);
+}
+
+//Read the first line of the request
+String request = client.readStringUntil("\r");
+Serial.println(request);
+client.flush();
+
+//Match the request
+float tempretureC;
+float tempretureF;
+int value = LOW;
+
+if(request.indexOf("/Tem=ON") != -1){
+float reading = analogRead(LM35);
+float tempretureC = LM35/3.1;
+//Serial.println("CENTI TEMP= ")
+//Serial.println(tempretureC);
+float tempretureF = ((tempretureC) *9.0/5.0)+32.0;
+//Serial.println("FARE TEMP= ");
+//Serial.print(tempretureF);
+
+value = HIGH;
+}
+
+//Return the response
+client.println("HTTP/1.1 200 OK");
+client.println("Connect-Type: text/html");
+client.println("<!DICTYPE HTML>");
+client.println("<html>");
+client.print("Celcius tempreture =");
+client.print(tempretureC);
+client.print("Fahrenheit tempreture =");
+client.print(tempretureF);
+
+if(value == HIGH){
+client.print("Updated");
+}else{
+client.print("Not Updated");
+}
+client.print("<br><br>");
+client.print("<a href= >");
+client.print(<html>);
+delay(1);
+Serial.println("Client disconnected");
+Serial.println("");
+}
+
+

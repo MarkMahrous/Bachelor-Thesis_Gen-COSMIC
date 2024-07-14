@@ -1,0 +1,916 @@
+"SoftwareSerial mySerial(10, 11);",CFP
+ Serial.begin(9600);,CFP
+ Serial.begin(11520);,CFP
+"Serial.println(""Ready to communicate!"");",CFP
+mySerial.begin(9600);,CFP
+" mySerial.println(""Hello, world!"");",CFP
+if (mySerial.available()),CFP
+mySerial.read()),CFP
+ Serial.write(mySerial.read());,CFP
+#include <SoftwareSerial.h>,not CFP
+int ledPin = 13;,not CFP
+"pinMode(ledPin, OUTPUT);",CFP
+if (data == '1'),not CFP
+"digitalWrite(ledPin, HIGH);",CFP
+Servo myservo;,CFP
+myservo.attach(9);,CFP
+int angle = Serial.parseInt();,CFP
+myservo.write(angle);,CFP
+#include <EthernetUdp.h>,not CFP
+#include <Ethernet.h>,not CFP
+"byte mac[] = { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED };",not CFP
+"IPAddress ip(192, 168, 0, 177);",CFP
+EthernetUDP udp;,CFP
+udp.begin(localPort);,CFP
+char packetBuffer[UDP_TX_PACKET_MAX_SIZE]; ,not CFP
+int packetSize = udp.parsePacket(); ,CFP
+if (packetSize) { ,not CFP
+"udp.read(packetBuffer, UDP_TX_PACKET_MAX_SIZE);",CFP
+Serial.println(packetBuffer);,CFP
+"udp.beginPacket(udp.remoteIP(), udp.remotePort());",CFP
+"udp.write(""ACK"");",CFP
+udp.endPacket();,CFP
+"const char* ssid = ""mySSID"";",not CFP
+"const char* password = ""myPASSWORD"";",not CFP
+"const char* mqtt_topic = ""myTOPIC"";",not CFP
+"const char* mqtt_server = ""mqtt.example.com"";",not CFP
+WiFiClient espClient; ,CFP
+"WiFi.begin(ssid, password);",CFP
+PubSubClient client(espClient); ,CFP
+#include <PubSubClient.h>,not CFP
+#include <WiFi.h>,not CFP
+delay(1000);,CFP
+while (WiFi.status() != WL_CONNECTED) { ,CFP
+"Serial.println(""Connected to WiFi"");",CFP
+"client.setServer(mqtt_server, 1883); ",CFP
+client.setCallback(callback);,CFP
+while (!client.connected()) { ,CFP
+"if (client.connect(""arduino"", mqtt_username, mqtt_password)) { ",CFP
+"Serial.println(""Connected to MQTT broker"");",CFP
+client.subscribe(mqtt_topic);,CFP
+String data = Serial.readStringUntil('\n'); ,CFP
+"client.publish(mqtt_topic, data.c_str()); ",CFP
+Serial.print((char)payload[i]);,CFP
+for (int i = 0; i < length; i++) {,not CFP
+else {,not CFP
+"AF_DCMotor motor(1, MOTOR12_1KHZ);",CFP
+#include <AFMotor.h>,not CFP
+bluetooth.begin(9600); ,CFP
+motor.setSpeed(200); ,CFP
+if (bluetooth.available()) {,CFP
+char data = bluetooth.read(); ,CFP
+if (data == 'F') { ,not CFP
+motor.run(FORWARD);,CFP
+},not CFP
+motor.run(RELEASE);,CFP
+motor.run(BACKWARD);,CFP
+} else if (data == 'B') { ,not CFP
+const int xPin = A0; ,not CFP
+const int yPin = A1; ,not CFP
+const int buttonPin = 2; ,not CFP
+int servoPos = 90;,not CFP
+"pinMode(buttonPin, INPUT_PULLUP); ",CFP
+myservo.write(servoPos); ,CFP
+int xVal = analogRead(xPin); ,CFP
+int yVal = analogRead(yPin); ,CFP
+int buttonVal = digitalRead(buttonPin); ,CFP
+"servoPos = map(xVal, 0, 1023, 0, 180);",not CFP
+if (buttonVal == LOW) { ,not CFP
+#include <LiquidCrystal.h>,not CFP
+"const int rs = 12, en = 11, d4 = 5, d5 = 4, d6 = 3, d7 = 2; ",not CFP
+"LiquidCrystal lcd(rs, en, d4, d5, d6, d7); ",CFP
+int sensorPin = A0; ,not CFP
+int sensorValue = 0; ,not CFP
+"lcd.setCursor(0, 0);",CFP
+"lcd.print(""LDR Sensor Value:"");",CFP
+"lcd.setCursor(0, 1);",CFP
+lcd.print(sensorValue); ,CFP
+"lcd.begin(16, 2); ",CFP
+#include <Wire.h>,not CFP
+const int MPU_addr=0x68;  ,not CFP
+"int16_t AcX,AcY,AcZ,Tmp,GyX,GyY,GyZ; ",not CFP
+Wire.begin(); ,CFP
+Wire.beginTransmission(MPU_addr); ,CFP
+Wire.write(0x6B); ,CFP
+Wire.write(0); ,CFP
+Wire.endTransmission(true); ,CFP
+const int ledPin = 13; ,not CFP
+if (buttonState == HIGH) { ,not CFP
+"digitalWrite(ledPin, HIGH); ",CFP
+} else { ,not CFP
+const int buzzerPin = 8; ,not CFP
+"tone(buzzerPin, 1000); ",CFP
+const int buttonPin = 2; ,not CFP
+buttonState = digitalRead(buttonPin); ,CFP
+"digitalWrite(ledPin, HIGH); ",CFP
+long duration; ,not CFP
+int distance; ,not CFP
+"pinMode(trigPin, OUTPUT); ",CFP
+delayMicroseconds(2); ,CFP
+"duration = pulseIn(echoPin, HIGH); ",CFP
+distance = duration * 0.034 / 2; ,not CFP
+"pinMode(trigPin, OUTPUT); ",CFP
+"pinMode(echoPin, INPUT); ",CFP
+"analogWrite(motorPin, motorSpeed); ",CFP
+if (distance < 10) { ,not CFP
+#include <EEPROM.h> ,not CFP
+#include <ESP8266WiFi.h> ,not CFP
+EEPROM.begin(512); ,CFP
+"EEPROM.write(addr, value); ",CFP
+EEPROM.end(); ,CFP
+int value = 42; ,not CFP
+EEPROM.commit(); ,CFP
+#include <SD.h> ,not CFP
+if (!SD.begin(4)) { ,CFP
+return;,CFP
+"myFile = SD.open(""data.txt"", FILE_WRITE); ",CFP
+if (myFile) { ,not CFP
+while (myFile.available()) { ,CFP
+if (!LittleFS.begin()) { ,CFP
+"File file = LittleFS.open(""/data.txt"", ""w""); ",CFP
+if (!file) { ,not CFP
+"file = LittleFS.open(""/data.txt"", ""r""); ",CFP
+file.close(); ,CFP
+#include <Adafruit_Sensor.h>,not CFP
+#include <Adafruit_BME280.h>,not CFP
+#define SEALEVELPRESSURE_HPA (1013.25) ,not CFP
+Adafruit_BME280 bme; ,CFP
+if (!bme.begin(0x76)) { ,CFP
+float temperature = bme.readTemperature(); ,CFP
+while (1);,not CFP
+float humidity = bme.readHumidity(); ,CFP
+float pressure = bme.readPressure() / 100.0F; ,CFP
+float altitude = bme.readAltitude(SEALEVELPRESSURE_HPA); ,CFP
+"uint16_t red, green, blue, clear, proximity; ",not CFP
+apds.enableColor(); ,CFP
+apds.setProximityGain(PGAIN_2X); ,CFP
+apds.enableProximity(); ,CFP
+#include <Adafruit_Sensor.h>,not CFP
+#include <Adafruit_BME280.h>,not CFP
+#include <Adafruit_SSD1306.h>,not CFP
+if (!bme.begin(0x76)) { ,CFP
+"display.begin(SSD1306_SWITCHCAPVCC, 0x3C); ",CFP
+display.clearDisplay(); ,CFP
+display.setTextSize(1); ,CFP
+display.setTextColor(WHITE); ,CFP
+"display.println("" %"");",CFP
+#define STEPPER_PIN_3 10 ,not CFP
+"digitalWrite(STEPPER_PIN_1, i & 0x1); ",CFP
+#include <Adafruit_LIS3DH.h>,not CFP
+#define LED_PIN_1 2 ,not CFP
+Adafruit_LIS3DH lis = Adafruit_LIS3DH(); ,CFP
+lis.begin(0x18); ,CFP
+lis.setRange(LIS3DH_RANGE_2_G); ,CFP
+float x = lis.x / 1000.0; ,not CFP
+ lis.read(); ,CFP
+#include <TinyGPS++.h>,not CFP
+#define GPS_RX_PIN 8 ,not CFP
+"SoftwareSerial gpsSerial(GPS_RX_PIN, GPS_TX_PIN); ",CFP
+TinyGPSPlus gps; ,CFP
+if (gps.encode(gpsSerial.read())) { ,CFP
+float lat = gps.location.lat(); ,CFP
+#include <OneWire.h>,not CFP
+#include <DallasTemperature.h>,not CFP
+#include <Servo.h>,not CFP
+DallasTemperature sensors(&oneWire);,CFP
+Servo servoMotor;,CFP
+servoMotor.attach(servoPin);,CFP
+sensors.begin();,CFP
+sensors.requestTemperatures();,CFP
+float tempC = sensors.getTempCByIndex(0);,CFP
+DynamicJsonDocument doc(200);,CFP
+#define ONE_WIRE_BUS 2,not CFP
+const float thresholdTemp = 25.0;,not CFP
+noTone(buzzerPin);,CFP
+"duration = pulseIn(echoPin, HIGH);",CFP
+distance = duration * 0.034 / 2;,not CFP
+tcs.setInterrupt(false);,CFP
+"DHT dht(dhtPin, DHT11);",CFP
+"String url = ""/update?temperature="" + String(temperature);",not CFP
+"Serial.println("" C"");",CFP
+float temperature = dht.readTemperature();,CFP
+ if (isnan(temperature)) {,not CFP
+return;,CFP
+},not CFP
+#include <DHT.h>,not CFP
+#include<EthernetUDP>,not CFP
+EthernetUDP.begin(); ,CFP
+EthernetUDP.beginPacket();,CFP
+EthernetUDP.write() ;,CFP
+EthernetUDP.endPacket();,CFP
+EthernetUDP.parsePacket();,CFP
+gps.location.lng();,CFP
+gps.date.isValid();,CFP
+gps.date.year();,CFP
+gps.date.month();,CFP
+gps.date.day();,CFP
+gps.time.isValid();,CFP
+display.begin();,CFP
+EEPROM.read(3000);,CFP
+display.clearDisplay();,CFP
+display.setTextSize();,CFP
+display.setTextColor();,CFP
+display.setCursor();,CFP
+display.println();,CFP
+display.display();,CFP
+CAN.begin();,CFP
+CAN.init_Mask();,CFP
+CAN.init_Filt();,CFP
+CAN.sendMsgBuf();,CFP
+CAN.readMsgBuf();,CFP
+CAN.checkReceive();,CFP
+mlx.begin();,CFP
+mlx.readObjectTempC();,CFP
+grid.begin();,CFP
+grid.readPixels();,CFP
+grid.getPixelTemperature();,CFP
+grid.getAmbientTemperature();,CFP
+lsm.begin();,CFP
+lsm.acceleration();,CFP
+Ism.magneticField();,CFP
+mag.begin();,CFP
+mag.read();,CFP
+mag.getHeading();,CFP
+lps.readPressure();,CFP
+lps.readTemperature();,CFP
+#define trigPin 3 ,not CFP
+#define echoPin ,not CFP
+int leftmotor = 4;,not CFP
+int leftmotor1 = 5;,not CFP
+int rightmotor = 6;,not CFP
+int rightmotor1 = 7;,not CFP
+"int duration, distance;",not CFP
+distance = (duration / 58);,not CFP
+if (distance < 10),not CFP
+if (distance >= 10),not CFP
+void setup(),CFP
+"lcd.setCursor(0, 0);",CFP
+void loop(),CFP
+int tsop = 12;,not CFP
+"pinMode(leftmotor1, OUTPUT);",CFP
+"pinMode(rightmotor1, OUTPUT);",CFP
+if (remote_val == 128),not CFP
+"digitalWrite(leftmotor1, LOW);",CFP
+"digitalWrite(rightmotor1, LOW );",CFP
+"Serial.println(""forward"");",CFP
+if (remote_val == 129),not CFP
+if (remote_val == 130),not CFP
+if (remote_val == 131),not CFP
+"int time = pulseIn(tsop, LOW);",CFP
+if (time > 2000) {,not CFP
+for (int counter1 = 0; counter1 < 12; counter1++) {,not CFP
+"if (pulseIn(12, LOW) > 1000){",CFP
+value = value + (1 << counter);,not CFP
+return value;,CFP
+"Serial.println(""right"");",CFP
+"Serial. println(""left"");",CFP
+#include<SoftwareSerial.h>,not CFP
+"SoftwareSerial BT(11, 12);",CFP
+String readvoice;,not CFP
+BT.begin(9600);,CFP
+readvoice += c ;,not CFP
+while (BT.available()) {,CFP
+char c = BT.read();,CFP
+"readvoice = """";",not CFP
+"pinMode(5, OUTPUT);",CFP
+"digitalWrite(5, HIGH);",CFP
+"digitalWrite(5, LOW);",CFP
+int sensorPin = A0;,not CFP
+int ledPin = 13;      ,not CFP
+sensorValue = analogRead(sensorPin);,CFP
+delay(sensorValue);,CFP
+"digitalWrite(ledPin, HIGH);",CFP
+"pinMode(ledPin, OUTPUT);",CFP
+int leftir =2;,not CFP
+int rightir = 3;,not CFP
+if(digitalRead(leftir) == HIGH && digitalRead(rightir) == HIGH);,CFP
+if(digitalRead(leftir) == HIGH && digitalRead(rightir) == LOW);,CFP
+if(digitalRead(leftir) == LOW && digitalRead(rightir) == LOW);,CFP
+int state;,not CFP
+int flag;,not CFP
+if (state == '0') {,not CFP
+if (flag = 0) {,not CFP
+flag = 1;,not CFP
+else if (state == '4') {,not CFP
+const int sampling = 100;,not CFP
+"unsigned long v, w, x;",not CFP
+for (int i = 0; i < sampling; i++) {,not CFP
+v += a ;,not CFP
+"EEPROM.write(address, valueToWrite);",CFP
+w += b;,not CFP
+x += c;,not CFP
+v /= sampling;,not CFP
+w /= sampling;,not CFP
+#include<D53231.h>,not CFP
+"D53231 rtc(SDA, SCL);",CFP
+TIme t;,not CFP
+rtc.setDOW(WEDNESDAY);,CFP
+"rtc.setTime(12, 0, 0);",CFP
+"rtc.setDate(1, 1, 2020);",CFP
+t = rtc.getTime();,CFP
+"int16_t AcX, AcY, AcZ, Tmp, GyX, GyY, GyZ;",not CFP
+AcX = Wire.read() << 8 | Wire.read();,CFP
+"double y = (180 / PI) * (atan(AcY / (sqrt((pow(AcX, 2) + (pow(AcZ, 2)))))));",not CFP
+"Wire.requestFrom(MPU_addr, 14, true);",CFP
+#define DHTTYPE DHT11,not CFP
+ int lightValue = analogRead(LDR_PIN);,CFP
+float humidity = dht.readHumidity();,CFP
+#include <NeoGPS.h>,not CFP
+#define GPS_RX_PIN 2,not CFP
+#define GPS_TX_PIN 3,not CFP
+"Serial.println(latitude, 6);",not CFP
+"SoftwareSerial gpsSerial(GPS_RX_PIN, GPS_TX_PIN);",CFP
+gps.encode(gps.read());,CFP
+#include <MFRC522.h>,not CFP
+#define SS_PIN 10,not CFP
+#define RST_PIN 9,not CFP
+"MFRC522 mfrc522(SS_PIN, RST_PIN);",CFP
+SPI.begin();,CFP
+mfrc522.PCD_Init();,CFP
+mfrc522.PICC_IsNewCardPresent();,CFP
+mfrc522.PICC_ReadCardSerial();,CFP
+"uid += String(mfrc522.uid.uidByte[i], HEX);",not CFP
+for (byte i = 0; i < mfrc522.uid.size; i++) {,not CFP
+#include <Adafruit_ADXL345_U.h>,not CFP
+Adafruit_ADXL345_Unified accel = Adafruit_ADXL345_Unified(12345);,CFP
+accel.begin();,CFP
+accel.getEvent(&event);,CFP
+"Serial.print("" m/s^2, Y: "");",CFP
+#include <Adafruit_BMP280.h>,not CFP
+Adafruit_BMP280 bmp;,CFP
+bmp.readPressure();,CFP
+"Serial.println("" hPa"");",CFP
+#include <CapacitiveSensor.h>,not CFP
+"CapacitiveSensor cs_4_2 = CapacitiveSensor(4, 2);",CFP
+long touchValue = cs_4_2.capacitiveSensor(30);,CFP
+#define SOUND_PIN A0,not CFP
+"Serial.print(""Touch Value: "");",CFP
+#define AIR_PIN A0,not CFP
+#define WATER_PIN A0,not CFP
+#define FLAME_PIN 2,not CFP
+gpsSerial.begin(9600);,CFP
+#include <IRremote.h>,not CFP
+#define IR_PIN 2,not CFP
+IRrecv irrecv(IR_PIN);,CFP
+ irrecv.enableIRIn();,CFP
+irrecv.resume();,CFP
+rfid.PCD_StopCrypto1();,CFP
+#include <Adafruit_TCS34725.h>,not CFP
+tcs.setInterrupt(false);,CFP
+tcs.setGain(TCS34725_GAIN_4X);,CFP
+tcs.setIntegrationTime(TCS34725_INTEGRATIONTIME_700MS);,CFP
+"uint16_t clear, red, green, blue;",not CFP
+"tcs.getRawData(&red, &green, &blue, &clear);",CFP
+"BLEService service(""19B10000-E8F2-537E-4F6C-D104768A1214"");",CFP
+"BLE.setLocalName(""DataProcessingDevice"");",CFP
+BLE.setAdvertisedService(service);,CFP
+#include <ArduinoBLE.h>,not CFP
+BLE.advertise();,CFP
+unsigned int value = dataCharacteristic.value();,not CFP
+dataCharacteristic.written();,CFP
+#include <BlynkSimpleEsp8266.h>,not CFP
+"char auth[] = ""YourAuthToken"";",not CFP
+"char ssid[] = ""YourWiFiSSID"";",not CFP
+"char pass[] = ""YourWiFiPassword"";",not CFP
+"Blynk.begin(auth, ssid, pass);",CFP
+Blynk.run();,CFP
+int processedValue = value * 2;,not CFP
+return processedValue;,CFP
+"Blynk.virtualWrite(V0, data);",CFP
+#define DATA_PIN 6,not CFP
+#define NUM_LEDS 10,not CFP
+"FastLED.addLeds<WS2812B, DATA_PIN, GRB>(leds, NUM_LEDS);",CFP
+CRGB leds[NUM_LEDS];,not CFP
+FastLED.show();,CFP
+EnergyMonitor emon;,CFP
+"emon.current(0, 111.1);",CFP
+"#include ""EmonLib.h""",not CFP
+double Irms = emon.calcIrms(1480); ,CFP
+"Adafruit_NeoPixel strip(NUM_LEDS, PIN, NEO_GRB + NEO_KHZ800);",CFP
+strip.show();,CFP
+"strip.setPixelColor(i, processedData)",CFP
+const int interval = 1000;,not CFP
+Timer1.attachInterrupt(processData);,CFP
+ads.begin();,CFP
+#include <Adafruit_ADS1015.h>,not CFP
+Adafruit_ADS1115 ads;,CFP
+int16_t rawValue = ads.readADC_SingleEnded(0);,CFP
+#define RREF 430.0,not CFP
+#define RNOMINAL 100.0,not CFP
+float processedValue = value * 1.8 + 32;,not CFP
+"float temperature = max31865.temperature(RNOMINAL, RREF);",not CFP
+String json;,not CFP
+EEPROM.read(address);,CFP
+EEPROM.read(0);,CFP
+"EEPROM.write(5000, value);",CFP
+EEPROM.read(30);,CFP
+EEPROM.read(100);,CFP
+EEPROM.read(4);,CFP
+int x = 0;,not CFP
+"String name = ""Ahmed""",not CFP
+double number = 10.5,not CFP
+float value = 5.2;,not CFP
+"String x = ""any thing""",not CFP
+long y = 9600;,not CFP
+int age = 20;,not CFP
+"int a, int b",not CFP
+"String list, int x",not CFP
+"double x, double y",not CFP
+"double myDouble;	",not CFP
+"myDouble = 3.14;	",not CFP
+"short z = 127;	",not CFP
+"double[] myArray = new double[5];	",not CFP
+"myArray[0] = 1.1;	",not CFP
+"myArray[1] = 9.2;	",not CFP
+"myArray[i] = ""new String""; 	",not CFP
+"Stack<Double> myStack = new Stack<>();	",not CFP
+"myStack.push(5);	",not CFP
+"myStack.push("""");	",not CFP
+"myStack.isEmpty()	",not CFP
+"int x = myStack.pop();	",not CFP
+"String y = stack.pop();	",not CFP
+"Queue<Double> myQueue = new LinkedList<>();	",not CFP
+"myQueue.add(55.5);	",not CFP
+"myQueue.isEmpty();	",not CFP
+"myQueue.add(""String"");	",not CFP
+"myQueue.remove()	",not CFP
+"System.out.println(""Removed element: "" + myQueue.remove());	",CFP
+"System.out.println(""Popped element: "" + myStack.pop());	",CFP
+"System.out.println(""Element "" + i + "": "" + myArray[i]);	",CFP
+"System.out.print(myQueue.remove())	",CFP
+"System.out.println(myArray[i]);	",CFP
+"System.out.println(age)	",CFP
+Scanner scanner = new Scanner(System.in);,CFP
+protected abstract double calculateArea(),CFP
+"System.out.pritnln("""")",CFP
+"System.out.print("""")",CFP
+System.out.println(name),CFP
+System.out.print(x),CFP
+return;,CFP
+return a * b;,CFP
+return a - b;,CFP
+a * b,not CFP
+a - b,not CFP
+"x + y	 ",not CFP
+"age ++	 ",not CFP
+"i++ 	 ",not CFP
+"System.out.print(""Hello World"");	",CFP
+"return names;	",CFP
+"i<=x.length	 ",not CFP
+"i<=5	 ",not CFP
+"j<=x	 ",not CFP
+"return name.equals("""")	",CFP
+"return x>=10;	",CFP
+x>=10;,not CFP
+"int sum = add(a, b);",not CFP
+"int difference = diff(x, y)	",not CFP
+"if(name.equals(""John""))	",not CFP
+"while(true)	",not CFP
+"return true;	",CFP
+"public int add(int a, int b)	",CFP
+"public void processInput(String input)	",CFP
+"public void getInput()	",CFP
+"private void initializeArray(int[] arr)	",CFP
+"protected void processInput(String[] inputs)	",CFP
+"public static void processInput(String input, int count)	",CFP
+"public void readFile()	",CFP
+"public void writeFile(String data)	",CFP
+"public String generateGreeting(String name)	",CFP
+"public void printOutput()	",CFP
+"public String capitalize(String input)	",CFP
+"protected double calculateSum(int[] numbers)	",CFP
+"protected static double calculateDouble()	",CFP
+"private void getUserInput()	",CFP
+"public void sortArray(int[] arr)	",CFP
+"public int findMax(int[] arr)	",CFP
+"public void processInput(String input)	",CFP
+"public void processInput(String input, boolean flag)	",CFP
+"public static boolean checkEquality(int a, int b)	",CFP
+"public static boolean checkEquality()	",CFP
+"public int calculateFactorial(int n)	",CFP
+"public String reverseString(String str)	",CFP
+"protected String concatenate(String str1, String str2)	",CFP
+"public int multiply(int a, int b)	",CFP
+"public int subtract(int a, int b)	",CFP
+"public static String sayHello()	",CFP
+"int value = scanner.nextInt();		",CFP
+"String value = scanner.next();		",CFP
+"String value = scanner.nextLine();		",CFP
+"double value = scanner.nextDouble();		",CFP
+"int input = sc.nextInt();		",CFP
+"String s = sc.next();		",CFP
+"String name = sc.nextLine();		",CFP
+"double i = sc.nextDouble();		",CFP
+"long number = sc.nextLong();	",CFP
+"char c = sc.next().charAt();	",CFP
+} else {,not CFP
+if (product > 50) {,not CFP
+{,not CFP
+},not CFP
+import java.util.Scanner;,not CFP
+import java.util.ArrayList;,not CFP
+import java.util.LinkedList;,not CFP
+import java.util.HashMap;,not CFP
+import java.util.Map;,not CFP
+import java.util.HashSet;,not CFP
+import java.util.Set;,not CFP
+import java.util.TreeSet;,not CFP
+import java.util.Stack;,not CFP
+import java.util.Queue;,not CFP
+import java.util.PriorityQueue;,not CFP
+import java.util.Random;,not CFP
+import java.util.Queue;,not CFP
+import java.io.FileReader;,not CFP
+import java.io.FileWriter;,not CFP
+import java.io.BufferedReader;,not CFP
+import java.io.BufferedWriter;,not CFP
+import java.io.IOException;,not CFP
+import java.io.FileNotFoundException;,not CFP
+import java.util.*;,not CFP
+switch (value) {,not CFP
+switch (x) {,not CFP
+scanner.close();,not CFP
+case,not CFP
+default,not CFP
+case 'x' :,not CFP
+break;,not CFP
+if (choice == 1 && sum > difference) {,not CFP
+float value = scanner.nextFloat();,CFP
+byte[] bytes = scanner.nextLine().getBytes();,CFP
+"String filePath = ""path/to/your/file.csv"";",not CFP
+Reader reader = new FileReader(filePath);,not CFP
+"Reader reader = new FileReader(""path/to/your/file.csv"");",not CFP
+"CSVParser csvParser = new CSVParser(reader, CSVFormat.DEFAULT)",CFP
+"CSVParser csvParser = new CSVParser(new FileReader(filePath), CSVFormat.DEFAULT)",CFP
+"String filePath = ""path/to/your/file.xlsx"";",not CFP
+FileInputStream fis = new FileInputStream(filePath);,not CFP
+Workbook workbook = WorkbookFactory.create(fis),CFP
+Workbook workbook = WorkbookFactory.create(new FileInputStream(filePath)),CFP
+"Workbook workbook = WorkbookFactory.create(new FileInputStream(""path/to/your/file.xlsx""))",CFP
+"String filePath = ""path/to/your/file.txt"";",not CFP
+BufferedReader br = new BufferedReader(new FileReader(filePath)),not CFP
+"BufferedReader br = new BufferedReader(new FileReader(""path/to/your/file.txt""))",not CFP
+line = br.readLine(),CFP
+"line = new BufferedReader(new FileReader(""path/to/your/file.txt"")).readLine()",CFP
+line = new BufferedReader(new FileReader(filepath)).readLine(),CFP
+line = reader.readLine(),CFP
+for (int i=0 ; i<=10 ; i++),not CFP
+"BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(""path/to/your/output.txt""));",not CFP
+bufferedWriter.close();,not CFP
+bufferedWriter.write(dataToWrite);,CFP
+bufferedWriter.newLine();,CFP
+workbook.write(fileOutputStream);,CFP
+workbook.close(); ,not CFP
+writer.write(data);,CFP
+writer.writeNext(data);,CFP
+"headerCell1.setCellValue(""Name"");",CFP
+"headerCell2.setCellValue(""Age"");",CFP
+"dataCell1.setCellValue(""John Doe"");",CFP
+"writer.println(""Line 1"");",CFP
+"writer.println(""Line 1"");",CFP
+PrintWriter writer = new PrintWriter(new FileWriter(filePath)),not CFP
+"double num1, num2;",not CFP
+"int i , j, k;",not CFP
+"String name, faculty, major;",not CFP
+Scanner sc = new Scanner(System.in);,not CFP
+"let z = 1;	",not CFP
+"let name = ""Mark"";	",not CFP
+"var num = 50;	",not CFP
+"const pi = 3.14;	",not CFP
+"let anyThing = ""anyThing"";	",not CFP
+"var y = 5000;	",not CFP
+"let age;	",not CFP
+"var age = 21;	",not CFP
+"let a, b;	",not CFP
+"var j, I;	",not CFP
+"var myValue;	",not CFP
+"myValue = 99;	",not CFP
+"const z = 127;	",not CFP
+"let amount = 36;	",not CFP
+"var count = 0;	",not CFP
+"let sum = 0;	",not CFP
+"var total = 1;	",not CFP
+"let names = [];	",not CFP
+"var myArray = [];	",not CFP
+"var arr = [1,2,3,4];	",not CFP
+"let names = [""John"", ""Mark"", ""Dani""];	",not CFP
+"var fruits = [""Orange"", ""Apple"", ""Mango""];	",not CFP
+"let fruits = [];	",not CFP
+"arr.	",not CFP
+"switch (condition) {	",not CFP
+"case 1 :	",not CFP
+"arr.push(4);	",not CFP
+"arr.pop();	",not CFP
+"let firstElement = arr[0];	",not CFP
+"let firstStudent = names[0];	",not CFP
+"let lastStudent = names[names.length - 1];	",not CFP
+"x.forEach(function(item) {	",CFP
+"y.forEach((){})	",CFP
+"names.forEach(function(name) {	",CFP
+"ages.forEach(function(age){	",CFP
+"ages.forEach((age){	",CFP
+"let filteredArr = arr.filter(function(item) {	",CFP
+"let doubledArr = arr.map(function(item) {	",CFP
+"anything.filter(()=>	",CFP
+"array.map(()=>	",CFP
+"ages.pop();	",not CFP
+"Students.push(""Mark"");	",not CFP
+"number.push(5);	",not CFP
+"console.log("""");	",CFP
+"console.log(name);	",CFP
+"console.log(x);	",CFP
+"console.log(total);	",CFP
+"console.log(sum);	",CFP
+"console.log(""Hello World"");	",CFP
+"console.log(""Removed element: "" + myQueue.shift());	",CFP
+names.shift();,not CFP
+console.log(myArray[i]);,CFP
+let value = myArray[i];,not CFP
+"function add(a, b) {	",CFP
+"function processInput(input)	",CFP
+"function getInput()	",CFP
+"function initializeArray(arr)	",CFP
+"function processInput(inputs)	",CFP
+"function readFile()	",CFP
+"function writeFile(data)	",CFP
+"function generateGreeting(name)	",CFP
+"function printOutput()	",CFP
+"function calculateSum(numbers)	",CFP
+"function sortArray(arr)	",CFP
+"function findMax(arr)	",CFP
+"function checkEquality(a, b) {	",CFP
+"let str = ""Hello World"";	",not CFP
+"let sub = str.substring(6);	",not CFP
+"let parts = str.split("", "");	",not CFP
+"let replacedStr = str.replace(""World"", ""Universe"");	",not CFP
+"let joinedStr = arr.join("", "");	",not CFP
+"let input = parseInt(prompt());	",CFP
+"let s = prompt();	",CFP
+"let name = prompt();	",CFP
+"let i = parseFloat(prompt());	",CFP
+"let number = parseInt(prompt())	",CFP
+"let c = prompt().charAt(0);	",CFP
+const fs = require('fs');,not CFP
+"let content = fs.readFileSync('file.txt', 'utf8');	",CFP
+"fs.writeFileSync('file.txt', 'Hello, World!', 'utf8');	",CFP
+"fetch('file.txt')	",CFP
+"then(response => response.text())	",CFP
+"then(text => console.log(text));	",CFP
+const csv = require('csv-parser');,not CFP
+"fs.createReadStream('data.csv')	",CFP
+".pipe(csv())	",CFP
+".on('data', (data) => results.push(data))	",CFP
+".on('end', () => {	",CFP
+"console.log(results);	",CFP
+"});	",not CFP
+"const Papa = require('papaparse');	",not CFP
+"Papa.parse(file, {	",CFP
+"complete: function(results) {	",CFP
+"let data = fs.readFileSync('data.json', 'utf8');	",CFP
+let obj = JSON.parse(data);,not CFP
+"let obj = { name: 'John', age: 30 };",not CFP
+"fs.writeFileSync('data.json', JSON.stringify(obj), 'utf8');",CFP
+const XLSX = require('xlsx');,not CFP
+let workbook = XLSX.readFile('data.xlsx');,CFP
+"let sheet_name_list = workbook.SheetNames;	",not CFP
+"let data=XLSX.utils.sheet_to_json(workbook.Sheets[sheet_name_list[0]]);	",not CFP
+"const ExcelJS = require('exceljs');	",not CFP
+"let workbook = new ExcelJS.Workbook();	",not CFP
+"workbook.xlsx.readFile('data.xlsx')	",CFP
+".then(function() {	",CFP
+"worksheet.eachRow(function(row, rowNumber) {	",CFP
+let worksheet = workbook.getWorksheet(1);,not CFP
+return item % 2 === 0;,CFP
+return k * 2;,CFP
+return age++;,CFP
+const readline = require('readline').createInterface({,not CFP
+"input: process.stdin,",not CFP
+output: process.stdout,not CFP
+readline.close();,not CFP
+switch (parseInt(choice)) {,not CFP
+"readline.question('Enter first number: ', (num1) => {",CFP
+"readline.question('Enter second number: ', (num2) => {",CFP
+"readline.question('Enter your choice: ', (choice) => {",CFP
+"const [num1, num2] = getUserInput();",not CFP
+"return [num1, num2];",CFP
+"[num1, num2]",not CFP
+do {,not CFP
+} while (i < 5);,not CFP
+#include <iostream>,not CFP
+#include <vector>,not CFP
+#include <string>,not CFP
+#include <cmath>,not CFP
+using namespace std;,not CFP
+int x = 10;,not CFP
+float f = 3.14;,not CFP
+char c = 'A';,not CFP
+bool b = true;,not CFP
+"string str = ""Hello, World!"";",not CFP
+"int numbers[] = {1, 2, 3, 4, 5};",not CFP
+"vector<int> vec = {6, 7, 8, 9, 10};",not CFP
+int main() {,CFP
+main(),not CFP
+for (int i = 0; i < 5; ++i) {,not CFP
+"cout << numbers[i] << "" "";",CFP
+cout << endl;,CFP
+for (auto num : vec) {,not CFP
+"cout << num << "" "";",CFP
+for (int i = 0; i < str.length(); ++i) {,not CFP
+"cout << str[i] << "" "";",CFP
+"cout << ""Sum of 5 and 7 is: "" << add(5, 7) << endl;",CFP
+return 0;,CFP
+"int add(int a, int b) {",CFP
+int fibonacci(int n) {,CFP
+int factorial(int a) {,CFP
+void printPrimes(int lastNum) {,CFP
+bool isPrime(int num) {,CFP
+void printNumbers(int x) {,CFP
+void printMessage(string message) {,CFP
+"double divide(double a, double b) {",CFP
+"double multiply(double i, double j) {",CFP
+"double multiply(double l, int b) {",CFP
+"int subtract(int c, int d) {",CFP
+"int add(int l, int m) {",CFP
+"double add(int l, double m) {",CFP
+if (b != 0),not CFP
+cout << message << endl;,CFP
+for (int i = 2; i <= sqrt(num); ++i) {,not CFP
+if (num % i == 0),not CFP
+if (isPrime(i)),not CFP
+bool result = isPrime(x),not CFP
+"bool isEqual(int y, int w)",CFP
+#include <fstream>,not CFP
+#include <sstream>,not CFP
+"#include ""json.hpp""",not CFP
+using json = nlohmann::json;,not CFP
+"#include ""xlsxwriter.h""",not CFP
+"#include ""libxl.h""",not CFP
+"ifstream inFile(""input.txt"");",not CFP
+"ofstream outFile(""output.txt"");",not CFP
+"ifstream x(""data.txt"");",not CFP
+"ofstream y(""result.txt"");",not CFP
+ string line;,not CFP
+"while (getline(inFile, line)) {",CFP
+"getline(inFile, line)",CFP
+"getline(x, y)",CFP
+outFile << line << endl;,CFP
+inFile.close();,not CFP
+outFile.close();,not CFP
+stringstream ss(line);,not CFP
+tokens.push_back(item);,not CFP
+vector<string> tokens;,not CFP
+"ifstream inFile(""data.json"");",not CFP
+"ifstream inFile(""input.csv"");",not CFP
+json j;,not CFP
+inFile >> j;,CFP
+outFile << j;,CFP
+"ofstream outFile(""output.json"");",not CFP
+"cout << arr[i] << "" "";",CFP
+"void reverseArray(int arr[], int size) {",CFP
+bool isPalindrome(string str) {,CFP
+"swap(arr[i], arr[size - i - 1]);",not CFP
+return original == str;,CFP
+"reverse(str.begin(), str.end());",not CFP
+"transform(str.begin(), str.end(), str.begin(), ::toupper);",not CFP
+void capitalizeString(string& str) {,CFP
+int size = sizeof(arr) / sizeof(arr[0]);,not CFP
+"cout << ""Original array: "";",CFP
+"printArray(arr, size);",not CFP
+"reverseArray(arr, size);",not CFP
+"printArray(arr, size);",not CFP
+capitalizeString(sentence);,not CFP
+"cout << ""Capitalized sentence: "" << sentence << endl;",CFP
+"cout << ""Is \"""" << word << ""\"" a palindrome? "" << (isPalindrome(word) ? ""Yes"" : ""No"") << endl;",CFP
+cin >> ;,CFP
+int intValue;,not CFP
+cin >> intValue;,CFP
+float floatValue;,not CFP
+cin >> floatValue;,CFP
+"cout << ""You entered: "" << floatValue << endl;",CFP
+char charValue;,not CFP
+"cout << ""Enter a character: "";",CFP
+cin >> c;,CFP
+"cout << ""You entered: "" << charValue << endl;",CFP
+string stringValue;,not CFP
+cin >> str;,CFP
+"getline(cin, line);",CFP
+string line;,not CFP
+class Student {,CFP
+class Car {,CFP
+class,CFP
+int number;,not CFP
+private:,not CFP
+public:,not CFP
+number = num;,not CFP
+number = 5;,not CFP
+num = 9;,not CFP
+name = n;,not CFP
+MyClass obj;,not CFP
+obj.setName(name);,not CFP
+obj.setNumber(num);,not CFP
+obj.printInfo();,not CFP
+prompt(),CFP
+Add,not CFP
+Multiply,not CFP
+Subtract,not CFP
+"result = multiply(num1, num2);",not CFP
+"result = add(num1, num2);",not CFP
+parseFloat(prompt());,CFP
+"const operation = prompt(""Choose an operation: 1. Add, 2. Multiply, 3. Subtract, 4. Quit"");",CFP
+"const x = parseFloat(prompt(""""));",CFP
+"var y = parseFloat(prompt(""Enter a number:""));",CFP
+import re,not CFP
+import numpy as np,not CFP
+import pandas as pd,not CFP
+import tensorflow as tf,not CFP
+from sklearn.feature_extraction.text import TfidfVectorizer,not CFP
+from sklearn.model_selection import train_test_split,not CFP
+import tkinter as tk,not CFP
+from tkinter import filedialog,not CFP
+"columns =[""LOC"",""Cosmic""]",not CFP
+"data[""Cosmic""]=(data[""Cosmic""]==""CFP"").astype(int)",not CFP
+data = data.sample(frac=1).reset_index(drop=True),not CFP
+sentences = data['LOC'],not CFP
+labels = data['Cosmic'],not CFP
+"X_train, X_test, y_train, y_test = train_test_split(sentences, labels, test_size=0.1, random_state=42)",not CFP
+vectorizer = TfidfVectorizer(),not CFP
+X_train_tfidf = vectorizer.fit_transform(X_train),not CFP
+X_test_tfidf = vectorizer.transform(X_test),not CFP
+max_features = X_train_tfidf.shape[1],not CFP
+total = 0,not CFP
+x = 5,not CFP
+"y = ['ahmed', 'john']",not CFP
+"model.compile(loss='binary_crossentropy',optimizer='adam',metrics=['accuracy'])",not CFP
+"line = re.sub(r'//.*|#.*', '', line)",not CFP
+if file_path:,not CFP
+file_path = filedialog.askopenfilename(),not CFP
+text = file.read(),CFP
+for line in lines:,not CFP
+if prediction > 0.5:,not CFP
+totalCFPs += 1,not CFP
+def clean_line(line):,CFP
+def browse_file():,CFP
+def measure():,CFP
+def ,CFP
+return line,CFP
+"if z == ""gg"":",not CFP
+def retrieveInput():,CFP
+def initializeArray(arr):,CFP
+def readData():,CFP
+def obtainUserInput():,CFP
+def findMaximum(list):,CFP
+def computeFactorial(n):,CFP
+def greet():,CFP
+"def joinStrings(str1, str2):",CFP
+value = int(input()),CFP
+value = input(),CFP
+value = float(input()),CFP
+input = int(input()),CFP
+s = input(),CFP
+i = float(input()),CFP
+number = int(input()),CFP
+c = input()[0],CFP
+a = eval(input()),CFP
+if product > 50:,not CFP
+def ():,CFP
+def init():,CFP
+def get():,CFP
+def set():,CFP
+lambda,CFP
+pd.read_csv(),CFP
+"try {	",not CFP
+catch,not CFP
+"a = int(input(""Enter an integer value: ""))",CFP
+print(x >= 10),CFP
+"print(""The value of x is:"", x)",CFP
+"print(""Data processing completed."")",CFP
+"print(""Area is calculated:"", computeArea())",CFP
+area = computeArea,not CFP
+print(),CFP
+"name = input(""Enter your name: "")",CFP
+"i = float(input(""Enter a floating-point value: ""))",CFP
+"number = int(input(""Enter a number: ""))",CFP
+"with open('file.txt', 'r') as f:",CFP
+content = f.read(),CFP
+"with open('output.txt', 'w') as f:",CFP
+"f.write('Hello, World!')",CFP
+reader = csv.reader(f),CFP
+for row in reader:,not CFP
+print(row),CFP
+"with open('data.csv', 'r', newline='') as f:",CFP
+"with open('output.csv', 'w', newline='') as f:",CFP
+writer = csv.writer(f),CFP
+"writer.writerow(['Name', 'Age'])",CFP
+"writer.writerow(['John', 30])",CFP
+data = json.load(f),CFP
+print(data),CFP
+"json.dump(data, f)",CFP
+"data = {'name': 'John', 'age': 30}",not CFP
+"from openpyxl import Workbook, load_workbook",not CFP
+wb = load_workbook('data.xlsx'),CFP
+ws = wb.active,not CFP
+for row in ws.iter_rows(values_only=True):,not CFP
+wb.save('output.xlsx'),CFP
+wb = Workbook(),not CFP
+df = pd.read_csv('data.csv'),CFP
+"df.to_csv('output.csv', index=False)",CFP
